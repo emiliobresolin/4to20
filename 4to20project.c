@@ -3,13 +3,14 @@
 #include <math.h>
 #include <conio.h>
 #include <time.h>
-//programa para calcular o erro fiducial de instrumentos de medição e criação de relatorios por EMILIO BRESOLIN
+//programa para calcular o erro fiducial atravez de looptest de instrumentos de medição e criação de relatorios por EMILIO BRESOLIN
 int main(void)
 {
 
     FILE * pFile; //cria variavel ponteiro para arquivo
     char op; //operacao de entrada e saida do programa
     char tec[10]; //nome tecnico
+    char sobre[10]; //sobrenome do tec
     char tag[10]; //TAG instrumento
     float med4[9], med8[9], med12[9], med16[9], med20[9]; //medicoes
     int i, n, x, y, z; //contadores
@@ -28,8 +29,10 @@ int main(void)
                 printf("Escolheu sair do menu\n");
                 break;
             case '1'://entrar
-                printf("\nDigite o nome do tecnico: \n");
+                printf("\nDigite o primeiro nome do tecnico: \n");
                 scanf("%s", &tec); //entrada do nome do tecnico
+                printf("\nDigite o sobrenome do tecnico: \n");
+                scanf("%s", &sobre); //entrada do sobrenome do tecnico
                 printf("\nTecnico %s prossiga com o TAG do instrumento:\n", tec);
                 scanf("%s", &tag); //entrada do tag do isntrumento
                 printf("\nAgora tecnico %s prossiga com as medicoes do instrumento %s: \n", tec, tag);
@@ -111,7 +114,7 @@ int main(void)
                 EF=((cal4-4)+(cal8-8)+(cal12-12)+(cal16-16)+(cal20-20))/5;
                 printf("\nERRO FIDUCIAL DO INSTRUMENTO %s FICA: +- %f \n", tag, EF);
                 // comeco do relatorio
-                fprintf(pFile, "Nome do tecnico: %s \n", tec);
+                fprintf(pFile, "Nome do tecnico: %s %s \n", tec, sobre);
                 fprintf(pFile, "Tag do instrumento: %s \n", tag);
                 for(i=0; i<=9; i++)
                 {
